@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace LogicaNegocio.Login
 {
-   public class clsLogin
+    public class clsLogin
     {
         private static DBTareaDataContext db = new DBTareaDataContext();
 
@@ -28,6 +28,20 @@ namespace LogicaNegocio.Login
             }
         }
 
+        public static List<TBL_USUARIO> getUser()
+        {
+            try
+            {
+                var user = db.TBL_USUARIO.Where(data => data.USU_STATUS == 'A');
+                return user.ToList();
+            }
+            catch (Exception)
+            {
 
+                throw new AggregateException("Usuario no valido");
+            }
+
+
+        }
     }
 }
